@@ -5,9 +5,16 @@ import Confetti from "react-confetti";
 
 export default function App() {
   const [dice, setDice] = React.useState(allNewDice());
-  const [tenzies, setTenzies] = React.useState(false);
-  const [count, setCount] = React.useState(0);
 
+  //Check if the game was been completed/won
+  const [tenzies, setTenzies] = React.useState(false);
+  //Track number of dice rolls
+  const [count, setCount] = React.useState(0);
+  //State for the stopwatch
+  const [time, setTime] = React.useState(0);
+  const [start, setStart] = React.useState(false);
+
+  //Check if the player has won the game
   React.useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
@@ -16,6 +23,21 @@ export default function App() {
       setTenzies(true);
     }
   }, [dice]);
+
+  //Start the stopwatch
+  React.useEffect(() => {
+    let interval = null;
+    if (start === true && !tenzies) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else {
+      clearInterval(interval);
+    }
+    return () => {
+      clearInterval(interval);
+    };
+  }, [start, tenzies]);
 
   function generateNewDie() {
     return {
@@ -36,6 +58,7 @@ export default function App() {
   function rollDice() {
     if (!tenzies) {
       setCount((oldCount) => oldCount + 1);
+      setStart(true);
       setDice((oldDice) =>
         oldDice.map((die) => {
           return die.isHeld ? die : generateNewDie();
@@ -44,11 +67,16 @@ export default function App() {
     } else {
       setTenzies(false);
       setCount(0);
+      setStart(false);
+      setTime(0);
       setDice(allNewDice());
     }
   }
 
   function holdDice(id) {
+    if (!tenzies) {
+      setStart(true);
+    }
     setDice((oldDice) =>
       oldDice.map((die) => {
         return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
@@ -77,7 +105,10 @@ export default function App() {
       <button className="roll-dice" onClick={rollDice}>
         {tenzies ? "New Game" : "Roll"}
       </button>
-      <p className="roll-counter">Dice roll count: {count}</p>
+      <div className="timers-container">
+        <p className="roll-counter">Dice roll count: {count}</p>
+        <p className="stopwatch">Time elapsed: {time}</p>
+      </div>
     </main>
   );
 }
