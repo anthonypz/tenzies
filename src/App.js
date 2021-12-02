@@ -1,7 +1,8 @@
 import React from "react";
-import Die from "./Die";
+import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import Timer from "./components/Timer";
 
 export default function App() {
   const [dice, setDice] = React.useState(allNewDice());
@@ -107,7 +108,7 @@ export default function App() {
       </button>
       <div className="timers-container">
         <p className="roll-counter">Dice roll count: {count}</p>
-        <p className="stopwatch">Time elapsed: {time}</p>
+        <Timer time={time} />
       </div>
     </main>
   );

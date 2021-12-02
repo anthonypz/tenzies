@@ -115,3 +115,7 @@ main {
   align-self: flex-start;
   margin: 0 0 0 30px;
 }
+
+.digits.minutes {
+  margin: 0 0 0 4px;
+}
