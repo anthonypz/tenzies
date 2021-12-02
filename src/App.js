@@ -28,7 +28,7 @@ export default function App() {
   //Start the stopwatch
   React.useEffect(() => {
     let interval = null;
-    if (start === true && !tenzies) {
+    if (start && !tenzies) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime + 10);
       }, 10);
