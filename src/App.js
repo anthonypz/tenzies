@@ -42,13 +42,14 @@ export default function App() {
     };
   }, [start, tenzies]);
 
-  const recordTime = localStorage.getItem("bestTime");
+  const recordTime = JSON.parse(localStorage.getItem("bestTime"));
   const [bestTime, setBestTime] = React.useState(recordTime || "");
+  console.log(typeof bestTime);
   React.useEffect(() => {
     let recordTime = localStorage.getItem("bestTime");
     if (tenzies && !start && (bestTime === "" || time < recordTime)) {
       localStorage.setItem("bestTime", time);
-      recordTime = localStorage.getItem("bestTime");
+      recordTime = JSON.parse(localStorage.getItem("bestTime"));
       setBestTime(recordTime);
     }
   }, [tenzies, start, time, bestTime]);
