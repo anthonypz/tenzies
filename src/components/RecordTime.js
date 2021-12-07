@@ -3,7 +3,7 @@ import React from "react";
 export default function RecordTime(props) {
   return (
     <p className="record-time">
-      Best time:
+      Fastest time:
       <span className="digits minutes">
         {("0" + Math.floor((props.bestTime / 60000) % 60)).slice(-2)}:
       </span>
