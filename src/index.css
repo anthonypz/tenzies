@@ -11,7 +11,7 @@ html {
 }
 
 main {
-  background-color: #f5f5f5;
+  background-color: #e9e9e9;
   height: 500px;
   max-width: 800px;
   border-radius: 5px;
@@ -39,7 +39,7 @@ main {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);
   grid-gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .die-face {
@@ -88,8 +88,8 @@ main {
 }
 
 .roll-dice {
-  height: 50px;
-  width: 150px;
+  height: 55px;
+  width: 165px;
   border: none;
   border-radius: 6px;
   background-color: #5035ff;
@@ -122,4 +122,22 @@ main {
 
 .laptime {
   margin: 0 0 0 8px;
+}
+
+@media screen and (max-width: 430px) {
+  body,
+  html {
+    padding: 0px;
+  }
+  main {
+    padding: 10px;
+    height: 100vh;
+  }
+
+  .dice-container {
+    grid-gap: 15px;
+  }
+  .timers-container {
+    margin: 0;
+  }
 }
