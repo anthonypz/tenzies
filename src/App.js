@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import Timer from "./components/Timer";
 import RecordTime from "./components/RecordTime";
+import LapTime from "./components/LapTime";
 
 export default function App() {
   const [dice, setDice] = React.useState(allNewDice());
@@ -43,14 +44,17 @@ export default function App() {
   }, [start, tenzies]);
 
   const recordTime = JSON.parse(localStorage.getItem("bestTime"));
-  const [bestTime, setBestTime] = React.useState(recordTime || "");
-  console.log(typeof bestTime);
+  const [bestTime, setBestTime] = React.useState(recordTime || null);
+  const [diff, setDiff] = React.useState(recordTime);
+  //Save record time to localStorage and save to state
   React.useEffect(() => {
-    let recordTime = localStorage.getItem("bestTime");
-    if (tenzies && !start && (bestTime === "" || time < recordTime)) {
+    let recordTime = JSON.parse(localStorage.getItem("bestTime"));
+    if (tenzies && !start && (bestTime === null || time < recordTime)) {
+      setDiff(recordTime);
       localStorage.setItem("bestTime", time);
-      recordTime = JSON.parse(localStorage.getItem("bestTime"));
-      setBestTime(recordTime);
+      setBestTime(time);
+    } else if (tenzies && !start && time > recordTime) {
+      setDiff(bestTime);
     }
   }, [tenzies, start, time, bestTime]);
 
@@ -82,7 +86,6 @@ export default function App() {
     } else {
       setTenzies(false);
       setCount(0);
-      //setStart(false);
       setTime(0);
       setDice(allNewDice());
     }
@@ -123,7 +126,8 @@ export default function App() {
       <div className="timers-container">
         <p className="roll-counter">Dice roll count: {count}</p>
         <Timer time={time} />
-        {bestTime !== "" && <RecordTime bestTime={bestTime} />}
+        {bestTime !== null && <RecordTime bestTime={bestTime} time={time} />}
+        {diff !== null && <LapTime time={time} tenzies={tenzies} diff={diff} />}
       </div>
     </main>
   );

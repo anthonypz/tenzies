@@ -3,7 +3,7 @@ import React from "react";
 export default function Timer(props) {
   return (
     <p className="stopwatch">
-      Time elapsed:
+      Timer:
       <span className="digits minutes">
         {("0" + Math.floor((props.time / 60000) % 60)).slice(-2)}:
       </span>
