@@ -128,6 +128,7 @@ main {
   body,
   html {
     padding: 0px;
+    height: 100%;
   }
   main {
     padding: 10px;

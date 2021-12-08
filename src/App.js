@@ -126,7 +126,7 @@ export default function App() {
       <div className="timers-container">
         <p className="roll-counter">Dice roll count: {count}</p>
         <Timer time={time} />
-        {bestTime !== null && <RecordTime bestTime={bestTime} time={time} />}
+        <RecordTime bestTime={bestTime} time={time} />
         {diff !== null && <LapTime time={time} tenzies={tenzies} diff={diff} />}
       </div>
     </main>
