@@ -1,6 +1,6 @@
 # Tenzies
 
-A fun, casual dice game where the goal is to roll ten dice until they are all the same number. You decide which dice get held or re-rolled. This project is built with React.
+A fun, casual dice game where the goal is to roll ten dice until they are all the same number. You decide which dice get held or re-rolled. Built with React.
 
 ## Features
 
